@@ -1,5 +1,3 @@
-
-
 const awsConfig = 
 {
   "aws_project_region": "ap-south-",

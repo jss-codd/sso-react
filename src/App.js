@@ -7,6 +7,7 @@ import SignUp from './SignUp'
 import {Amplify} from 'aws-amplify';
 import aws_exports from './aws-exports';
 import OTP from './OTP'
+import Home from './Home'
 Amplify.configure(aws_exports);
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
               <Route exact path="/" element={<Login />} />
               <Route path="/sign-in" element={<Login />} />
               <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/otp" element={<OTP />} />
             </Routes>
           </div>

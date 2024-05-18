@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {fetchAuthSession,signIn} from 'aws-amplify/auth';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
+    const [token , setToken ] = useState("");
+    const navigate = useNavigate();
+
     const handleSubmit =  async () =>{
         try {
 
@@ -17,12 +21,22 @@ const Login = () => {
             const session = await fetchAuthSession();
             console.log("--session-",JSON.stringify(session,null,2));
             console.log("--tokens?.idToken?.toString();---",session.tokens?.idToken?.toString());
-
+          
             
         } catch (error) {
              console.log("--error-",error);
         }
     }
+
+    useEffect(()=>{
+      const getSession=async()=>{
+        const session = await fetchAuthSession();
+        if(session.tokens?.idToken?.toString()){
+           navigate("/home")
+        }
+      }  
+      getSession();
+    },[])
   return (
     <form>
     <h3>Sign In</h3>
