@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useEffect,useState} from 'react'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
@@ -8,8 +8,21 @@ import {Amplify} from 'aws-amplify';
 import aws_exports from './aws-exports';
 import OTP from './OTP'
 import Home from './Home'
+import {fetchAuthSession} from 'aws-amplify/auth';
+
+
 Amplify.configure(aws_exports);
 function App() {
+ const [ token , setToken] = useState("")
+  useEffect(()=>{
+    const getSession=async()=>{
+      const session = await fetchAuthSession();
+      if(session.tokens?.idToken?.toString()){
+        setToken(session.tokens?.idToken?.toString());
+      }
+    }  
+    getSession();
+  },[])
   return (
     <Router>
       <div className="App">
@@ -19,7 +32,7 @@ function App() {
               positronX
             </Link>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-              <ul className="navbar-nav ml-auto">
+             {!token &&  <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <Link className="nav-link" to={'/sign-in'}>
                     Login
@@ -35,7 +48,7 @@ function App() {
                    OTP
                   </Link>
                 </li>
-              </ul>
+              </ul>}
             </div>
           </div>
         </nav>
