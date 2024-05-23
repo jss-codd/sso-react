@@ -77,7 +77,7 @@ const Login = () => {
         </label>
       </div>
       <div>
-      <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+      <GoogleLogin  useOneTap  flow="auth-code"  onSuccess={responseMessage} onError={errorMessage} />
       </div>
     </div>
     
