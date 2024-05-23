@@ -32,7 +32,7 @@ function App() {
               positronX
             </Link>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-             {!token &&  <ul className="navbar-nav ml-auto">
+             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <Link className="nav-link" to={'/sign-in'}>
                     Login
@@ -48,7 +48,7 @@ function App() {
                    OTP
                   </Link>
                 </li>
-              </ul>}
+              </ul>
             </div>
           </div>
         </nav>

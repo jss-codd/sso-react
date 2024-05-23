@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {fetchAuthSession,signIn} from 'aws-amplify/auth';
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 
 
 const Login = () => {
@@ -27,16 +28,22 @@ const Login = () => {
              console.log("--error-",error);
         }
     }
+  const responseMessage = (response) => {
+      console.log(response);
+  };
+  const errorMessage = (error) => {
+      console.log(error);
+  };
 
-    useEffect(()=>{
-      const getSession=async()=>{
-        const session = await fetchAuthSession();
-        if(session.tokens?.idToken?.toString()){
-           navigate("/home")
-        }
-      }  
-      getSession();
-    },[])
+    // useEffect(()=>{
+    //   const getSession=async()=>{
+    //     const session = await fetchAuthSession();
+    //     if(session.tokens?.idToken?.toString()){
+    //        navigate("/home")
+    //     }
+    //   }  
+    //   getSession();
+    // },[])
   return (
     <form>
     <h3>Sign In</h3>
@@ -69,7 +76,11 @@ const Login = () => {
           Remember me
         </label>
       </div>
+      <div>
+      <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+      </div>
     </div>
+    
     <div className="d-grid">
       <button  onClick={handleSubmit} type="button" className="btn btn-primary">
         Submit
