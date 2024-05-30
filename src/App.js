@@ -9,6 +9,7 @@ import aws_exports from './aws-exports';
 import OTP from './OTP'
 import Home from './Home'
 import {fetchAuthSession} from 'aws-amplify/auth';
+import InvitationPage from './ InvitationPage'
 
 
 Amplify.configure(aws_exports);
@@ -24,6 +25,7 @@ function App() {
     getSession();
   },[])
   return (
+
     <Router>
       <div className="App">
         <nav className="navbar navbar-expand-lg navbar-light fixed-top">
@@ -60,6 +62,7 @@ function App() {
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="/home" element={<Home />} />
               <Route path="/otp" element={<OTP />} />
+              <Route path="/invite/:token" element={<InvitationPage />} />
             </Routes>
           </div>
         </div>

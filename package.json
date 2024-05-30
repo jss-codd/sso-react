@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.10.4",
     "@aws-amplify/ui-react": "^6.1.11",
     "@react-oauth/google": "^0.12.1",
     "@testing-library/jest-dom": "^5.17.0",
@@ -10,6 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "aws-amplify": "^6.3.2",
     "bootstrap": "^5.3.3",
+    "graphql": "^16.8.1",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.3.1",
