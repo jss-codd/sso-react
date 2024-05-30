@@ -1,16 +1,13 @@
 // InvitationPage.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import InvitationSuccess from './Invite';
 import { useParams } from 'react-router-dom'
 
 const SEND_INVITATION = gql`
-  mutation SendInvitation($email: String!) {
-    sendInvitation(email: $email) {
-      success
-      message
-    }
-  }
+  mutation Mutation($token: String) {
+  sendOrgJoinInviation(token: $token)
+}
 `;
 
 const InvitationPage = () => {
@@ -21,22 +18,29 @@ const InvitationPage = () => {
 
   const [sendInvitation, { loading, error }] = useMutation(SEND_INVITATION, {
     onCompleted: (data) => {
-      if (data.sendInvitation.success) {
+        console.log("--data---",data.sendOrgJoinInviation);
+      if (data?.sendOrgJoinInviation =="success") {
         setSuccess(true);
       } else {
-        alert(data.sendInvitation.message);
+         alert(data);
       }
     },
   });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (email) {
-      sendInvitation({ variables: { email } });
-    } else {
-      alert('Please enter an email address.');
+  useEffect(()=>{
+    if(token){
+        sendInvitation({ variables: { token } });
     }
-  };
+
+  },[token])
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     if (email) {
+//       sendInvitation({ variables: { email } });
+//     } else {
+//       alert('Please enter an email address.');
+//     }
+//   };
 
   if (success) {
     return <InvitationSuccess />;

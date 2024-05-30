@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'
-import { gql, useMutation } from '@apollo/client';
 
 const InvitationSuccess = () => {
     const  { token } = useParams();
